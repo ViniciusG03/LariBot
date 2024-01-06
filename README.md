@@ -1,2 +1,2 @@
 # LariBot
-Simple IA for Discord
+Simple IA for Discord.
