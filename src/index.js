@@ -1,5 +1,7 @@
 require('dotenv').config();
 const { Client, IntentsBitField } = require('discord.js');
+const { CommandHandler } = require('djs-commander');
+const path = require('path');
 
 const client = new Client({
     intents: [
@@ -7,21 +9,15 @@ const client = new Client({
         IntentsBitField.Flags.GuildMembers,
         IntentsBitField.Flags.GuildMessages,
         IntentsBitField.Flags.MessageContent,
+        IntentsBitField.Flags.GuildPresences,
     ],
 })
 
-client.on('ready', (client) => {
-    console.log(`✅ ${client.user.tag} is online.`);
+new CommandHandler({
+    client: client,
+    commandsPath: path.join(__dirname, 'commands'),
+    eventsPath: path.join(__dirname, 'events'), 
+    testServer: process.env.TEST_SERVER,
 });
-
-client.on('ressageCreate', (message) => {
-    if(message.content == "Lari") {
-        message.reply(`Lari é o apelido de uma irmã do <@${"905475185560399893"}>, uma pessoa brilhante e especial!`);
-    }
-
-    if(message.content == "O que você é?") {
-        message.reply("Eu sou uma Inteligência Artificial que está em processo de desenvolvimento.")
-    }
-})
 
 client.login(process.env.TOKEN);
