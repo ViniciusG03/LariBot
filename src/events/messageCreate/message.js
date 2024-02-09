@@ -1,10 +1,13 @@
 const { OpenAI } = require('openai');
+const config = require('../../../config.json');
+
+const openai_key = config.openai_key;
 
 const IGNORE_PREFIX = "!";
 const CHANNELS = ['1193270507752144927'];
 
 const openai = new OpenAI ({
-    apiKey: process.env.OPENAI_KEY,
+    apiKey: openai_key
 })
 
 module.exports = async (message, client) => {
